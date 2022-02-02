@@ -28,7 +28,7 @@ public class Start {
                 result = number_massive[0] * number_massive[1];
                 break;
         }*/
-            for (int i : ch) {
+            for (char i : ch) {
                 if ("+".equals(String.valueOf(ch))) {
                     result = number_massive[0] + number_massive[1];
                 } else
@@ -44,6 +44,6 @@ public class Start {
             }
         System.out.println(number_massive[0]);
         System.out.println(number_massive[1]);
-        //System.out.println(result);
+        System.out.println(result);
     }
 }
