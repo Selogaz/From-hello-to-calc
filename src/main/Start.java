@@ -10,40 +10,30 @@ public class Start {
         String s = in.nextLine();
         String numberOnly = s.replaceAll("[^0-9]", "");
         char[] number_massive = numberOnly.toCharArray();
-       // int first_num = number_massive[0];
-       // int second_num = number_massive[1];
+        int first_num = 0;
+        int second_num = 0;
+        int numArr[] = new int[number_massive.length];
+        for (int i = 0; i < number_massive.length; i++) {
+            numArr[i] = number_massive[i];
+        }
+        first_num = Character.getNumericValue(numArr[0]);
+        second_num = Character.getNumericValue(numArr[1]);
         char[] ch = s.toCharArray();
         int result = 0;
-        /*switch (ch) {
-            case "+":
-                result = number_massive[0] + number_massive[1];
-                break;
-            case "-":
-                result = number_massive[0] - number_massive[1];
-                break;
-            case "/":
-                result = number_massive[0] / number_massive[1];
-                break;
-            case "*":
-                result = number_massive[0] * number_massive[1];
-                break;
-        }*/
-            for (char i : ch) {
-                if ("+".equals(String.valueOf(ch))) {
-                    result = number_massive[0] + number_massive[1];
+           for (int i = 0; i < ch.length; i++) {
+                if ("+".equals(String.valueOf(ch[i]))) {
+                    result = first_num + second_num;
                 } else
-                if ("-".equals(String.valueOf(ch))) {
-                    result = number_massive[0] - number_massive[1];
+                if ("-".equals(String.valueOf(ch[i]))) {
+                    result = first_num - second_num;
                 } else
-                if ("*".equals(String.valueOf(ch))) {
-                    result = number_massive[0] * number_massive[1];
+                if ("*".equals(String.valueOf(ch[i]))) {
+                    result = first_num * second_num;
                 } else
-                if ("/".equals(String.valueOf(ch))) {
-                    result = number_massive[0] / number_massive[1];
+                if ("/".equals(String.valueOf(ch[i]))) {
+                    result = first_num / second_num;
                 }
             }
-        System.out.println(number_massive[0]);
-        System.out.println(number_massive[1]);
         System.out.println(result);
     }
 }
