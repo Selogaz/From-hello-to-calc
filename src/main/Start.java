@@ -10,71 +10,11 @@ public class Start {
         System.out.println("Введите выражение с двумя членами не более 10:");
         String Input_string = in.nextLine();
         char[] Input_string_massive = Input_string.toCharArray();
-        int rome_one = 20;
-        int rome_two = 20;
-        for (int i = 0; i < Input_string.length(); i++) {
-            if ("III".equals(String.valueOf(Input_string_massive[i]))) {
-                if ((rome_one == 20) && (rome_two == 20)) {
-                    rome_one = 3;
-                } else if (rome_one != 20) {
-                    rome_two = 3;
-                }
-            } else if ("II".equals(String.valueOf(Input_string_massive[i]))) {
-                if ((rome_one == 20) && (rome_two == 20)) {
-                    rome_one = 2;
-                } else if (rome_one != 20) {
-                    rome_two = 2;
-                }
-            } else if ("I".equals(String.valueOf(Input_string_massive[i]))) {
-                if ((rome_one == 20) && (rome_two == 20)) {
-                    rome_one = 1;
-                } else if (rome_one != 20) {
-                    rome_two = 1;
-                }
-            } else if ("IV".equals(String.valueOf(Input_string_massive[i]))) {
-                if ((rome_one == 20) && (rome_two == 20)) {
-                    rome_one = 4;
-                } else if (rome_one != 20) {
-                    rome_two = 4;
-                }
-            } else if ("V".equals(String.valueOf(Input_string_massive[i]))) {
-                if ((rome_one == 20) && (rome_two == 20)) {
-                    rome_one = 5;
-                } else if (rome_one != 20) {
-                    rome_two = 5;
-                }
-            } else if ("VI".equals(String.valueOf(Input_string_massive[i]))) {
-                if ((rome_one == 20) && (rome_two == 20)) {
-                    rome_one = 6;
-                } else if (rome_one != 20) {
-                    rome_two = 6;
-                }
-            } else if ("VII".equals(String.valueOf(Input_string_massive[i]))) {
-                if ((rome_one == 20) && (rome_two == 20)) {
-                    rome_one = 7;
-                } else if (rome_one != 20) {
-                    rome_two = 7;
-                }
-            } else if ("VIII".equals(String.valueOf(Input_string_massive[i]))) {
-                if ((rome_one == 20) && (rome_two == 20)) {
-                    rome_one = 8;
-                } else if (rome_one != 20) {
-                    rome_two = 8;
-                }
-            } else if ("IX".equals(String.valueOf(Input_string_massive[i]))) {
-                if ((rome_one == 20) && (rome_two == 20)) {
-                    rome_one = 9;
-                } else if (rome_one != 20) {
-                    rome_two = 9;
-                }
-            } else if ("X".equals(String.valueOf(Input_string_massive[i]))) {
-                if ((rome_one == 20) && (rome_two == 20)) {
-                    rome_one = 10;
-                } else if (rome_one != 20) {
-                    rome_two = 10;
-                }
-            }
-        }
+        String[] Input_string_splitted = Input_string.split("[-+*/]");
+        String Roman_first = Input_string_splitted[0];
+        String Roman_second = Input_string_splitted[1].trim();
+        int rome_one = romanToNumber(Roman_first);
+        int rome_two = romanToNumber(Roman_second);
         String numberOnly = Input_string.replaceAll("[^0-9]", "");
         char[] number_massive = numberOnly.toCharArray();
         int numArr[] = new int[number_massive.length];
@@ -125,7 +65,7 @@ public class Start {
                 System.exit(0);
             }
         }
-        if (rome_one == 20) {
+        if (numArr.length != 0) {
             System.out.println("Output:");
             System.out.println(result);
         }
@@ -133,5 +73,34 @@ public class Start {
             System.out.println("Римский результат:");
             System.out.println(rome_one + " " + rome_two + " " + rome_result);
         }
+        System.out.println(Roman_first + " " + Roman_second);
+    }
+    private static int romanToNumber (String roman) {
+        try {
+            if (roman.equals("I")) {
+                return 1;
+            } else if (roman.equals("II")) {
+                return 2;
+            } else if (roman.equals("III")) {
+                return 3;
+            } else if (roman.equals("IV")) {
+                return 4;
+            } else if (roman.equals("V")) {
+                return 5;
+            } else if (roman.equals("VI")) {
+                return 6;
+            } else if (roman.equals("VII")) {
+                return 7;
+            } else if (roman.equals("VIII")) {
+                return 8;
+            } else if (roman.equals("IX")) {
+                return 9;
+            } else if (roman.equals("X")) {
+                return 10;
+            }
+        } catch (InputMismatchException e) {
+            throw new InputMismatchException("Неверный формат данных");
+        }
+        return -1;
     }
 }
