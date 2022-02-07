@@ -43,21 +43,21 @@ public class Start {
             System.exit(0);
         }
         int result = 0;
-        int rome_result = 0;
+        int rome_calc = 0;
         for (int i = 0; i < Input_string_massive.length; i++) {
             try {
                 if ("+".equals(String.valueOf(Input_string_massive[i]))) {
                     result = first_num + second_num;
-                    rome_result = rome_one + rome_two;
+                    rome_calc = rome_one + rome_two;
                 } else if ("-".equals(String.valueOf(Input_string_massive[i]))) {
                     result = first_num - second_num;
-                    rome_result = rome_one - rome_two;
+                    rome_calc = rome_one - rome_two;
                 } else if ("*".equals(String.valueOf(Input_string_massive[i]))) {
                     result = first_num * second_num;
-                    rome_result = rome_one * rome_two;
+                    rome_calc = rome_one * rome_two;
                 } else if ("/".equals(String.valueOf(Input_string_massive[i]))) {
                     result = first_num / second_num;
-                    rome_result = rome_one / rome_two;
+                    rome_calc = rome_one / rome_two;
                 }
             } catch (ArithmeticException | InputMismatchException e) {
                 System.out.println("Ошибка: " + e);
@@ -65,15 +65,14 @@ public class Start {
                 System.exit(0);
             }
         }
+        System.out.println("Результат вычисления:");
         if (numArr.length != 0) {
-            System.out.println("Output:");
             System.out.println(result);
         }
         else {
-            System.out.println("Римский результат:");
-            System.out.println(rome_one + " " + rome_two + " " + rome_result);
+            String result_roman = convertNumToRoman(rome_calc);
+            System.out.println(result_roman);
         }
-        System.out.println(Roman_first + " " + Roman_second);
     }
     private static int romanToNumber (String roman) {
         try {
@@ -102,5 +101,10 @@ public class Start {
             throw new InputMismatchException("Неверный формат данных");
         }
         return -1;
+    }
+    private static String convertNumToRoman (int numArabian) {
+        String[] roman = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
+        final String Roman_result = roman[numArabian];
+        return Roman_result;
     }
 }
