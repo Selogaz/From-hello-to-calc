@@ -7,14 +7,21 @@ import java.lang.String;
 public class Start {
    static int num1;
    static int num2;
+   static int result;
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         System.out.println("Введите выражение с двумя членами не более 10 каждое:");
         String Input_string = in.nextLine();
         char[] Input_string_massive = Input_string.toCharArray();
         String[] Input_string_splitted = Input_string.split("[-+*/]");
-        String Roman_first = Input_string_splitted[0];
-        String Roman_second = Input_string_splitted[1].trim();
+        String Roman_first;
+        String Roman_second;
+        try {
+        Roman_first = Input_string_splitted[0];
+        Roman_second = Input_string_splitted[1].trim();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ArrayIndexOutOfBoundsException("Строка не является математической операцией");
+        }
         num1 = romanToNumber(Roman_first);
         num2 = romanToNumber(Roman_second);
         String numberOnly = Input_string.replaceAll("[^0-9]", "");
@@ -24,14 +31,17 @@ public class Start {
             numArr[i] = number_massive[i];
         }
         if (numArr.length != 0) {
-            num1 = Integer.parseInt(Roman_first);
-            num2 = Integer.parseInt(Roman_second);
-            if ((num1 > 10) || (num2 > 10)) {
-                System.out.println("Число должно быть меньше 10");
-                System.exit(0);
+            try {
+                num1 = Integer.parseInt(Roman_first);
+                num2 = Integer.parseInt(Roman_second);
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException("используются одновременно разные системы счисления");
             }
         }
-        int result = 0;
+        if ((num1 > 10) || (num2 > 10)) {
+            System.out.println("Число должно быть меньше 10");
+            System.exit(0);
+        }
         for (int i = 0; i < Input_string_massive.length; i++) {
             if ("+".equals(String.valueOf(Input_string_massive[i]))) {
                 result = num1 + num2;
@@ -54,8 +64,12 @@ public class Start {
             System.out.println(result);
         }
         else {
-            String result_roman = convertNumToRoman(result);
-            System.out.println(result_roman);
+            try {
+                String result_roman = convertNumToRoman(result);
+                System.out.println(result_roman);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new ArrayIndexOutOfBoundsException("в римской системе нет отрицательных чисел");
+            }
         }
     }
     private static int romanToNumber (String roman) {
@@ -94,10 +108,6 @@ public class Start {
                 "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
                 "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
                 "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"};
-        /*if (numArabian > 10) {
-            System.out.println("Число должно быть меньше 10");
-            System.exit(0);
-        }*/
         String Roman_result = roman[numArabian];
         return Roman_result;
     }
