@@ -5,6 +5,8 @@ import java.util.Scanner;
 import java.lang.String;
 
 public class Start {
+   static int num1;
+   static int num2;
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         System.out.println("Введите выражение с двумя членами не более 10:");
@@ -21,48 +23,31 @@ public class Start {
         for (int i = 0; i < number_massive.length; i++) {
             numArr[i] = number_massive[i];
         }
-        int first_num = 0;
-        int second_num = 0;
         if (numArr.length != 0) {
-            first_num = Character.getNumericValue(numArr[0]);
-            second_num = Character.getNumericValue(numArr[1]);
-        }
-        if ((number_massive.length == 3) && (Character.getNumericValue(numArr[1]) == 0)) {
-            first_num = 10;
-            second_num = Character.getNumericValue(numArr[2]);
-        } else if ((number_massive.length == 3) && (Character.getNumericValue(numArr[2]) == 0)) {
-            second_num = 10;
-        } else if ((number_massive.length == 4) && (Character.getNumericValue(numArr[3]) == 0)) {
-            first_num = 10;
-            second_num = 10;
-        } else if ((number_massive.length == 4) && (((Character.getNumericValue(numArr[0] + numArr[1]) > 1) || (Character.getNumericValue(numArr[2] + numArr[3]) > 1)))) {
-            System.out.println("Не вводите числа больше 10!");
-            System.exit(0);
-        } else if ((number_massive.length == 3) && (((Character.getNumericValue(numArr[0] + numArr[1]) >= 2) || (Character.getNumericValue(numArr[1] + numArr[2]) >= 2)))) {
-            System.out.println("Не вводите числа больше 10!");
-            System.exit(0);
+            num1 = Integer.parseInt(Roman_first);
+            num2 = Integer.parseInt(Roman_second);
         }
         int result = 0;
         int rome_calc = 0;
         for (int i = 0; i < Input_string_massive.length; i++) {
-            try {
-                if ("+".equals(String.valueOf(Input_string_massive[i]))) {
-                    result = first_num + second_num;
-                    rome_calc = rome_one + rome_two;
-                } else if ("-".equals(String.valueOf(Input_string_massive[i]))) {
-                    result = first_num - second_num;
-                    rome_calc = rome_one - rome_two;
-                } else if ("*".equals(String.valueOf(Input_string_massive[i]))) {
-                    result = first_num * second_num;
-                    rome_calc = rome_one * rome_two;
-                } else if ("/".equals(String.valueOf(Input_string_massive[i]))) {
-                    result = first_num / second_num;
-                    rome_calc = rome_one / rome_two;
+            if ("+".equals(String.valueOf(Input_string_massive[i]))) {
+                result = num1 + num2;
+                rome_calc = rome_one + rome_two;
+            } else if ("-".equals(String.valueOf(Input_string_massive[i]))) {
+                result = num1 - num2;
+                rome_calc = rome_one - rome_two;
+            } else if ("*".equals(String.valueOf(Input_string_massive[i]))) {
+                result = num1 * num2;
+                rome_calc = rome_one * rome_two;
+            } else if ("/".equals(String.valueOf(Input_string_massive[i]))) {
+                try {
+                result = num1 / num2;
+                rome_calc = rome_one / rome_two;
+                } catch (ArithmeticException | InputMismatchException e) {
+                    System.out.println("Ошибка: " + e);
+                    System.out.println("Введено нецелое или нулевое значение!");
+                    System.exit(0);
                 }
-            } catch (ArithmeticException | InputMismatchException e) {
-                System.out.println("Ошибка: " + e);
-                System.out.println("Введено нецелое или нулевое значение!");
-                System.exit(0);
             }
         }
         System.out.println("Результат вычисления:");
@@ -104,7 +89,7 @@ public class Start {
     }
     private static String convertNumToRoman (int numArabian) {
         String[] roman = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
-        final String Roman_result = roman[numArabian];
+        String Roman_result = roman[numArabian];
         return Roman_result;
     }
 }
