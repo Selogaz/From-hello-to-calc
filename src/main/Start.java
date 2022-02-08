@@ -35,7 +35,7 @@ public class Start {
                 num1 = Integer.parseInt(Roman_first);
                 num2 = Integer.parseInt(Roman_second);
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("используются одновременно разные системы счисления");
+                throw new NumberFormatException("используются одновременно разные системы счисления" + "\n" + "или введено нецелое число");
             }
         }
         if ((num1 > 10) || (num2 > 10)) {
@@ -54,16 +54,20 @@ public class Start {
                 result = num1 / num2;
                 } catch (ArithmeticException | InputMismatchException e) {
                     System.out.println("Ошибка: " + e);
-                    System.out.println("Введено нецелое или нулевое значение!");
+                    System.out.println("Делить на ноль нельзя!");
                     System.exit(0);
                 }
             }
         }
         System.out.println("Результат вычисления:");
         if (numArr.length != 0) {
-            System.out.println(result);
-        }
-        else {
+            if (Input_string_splitted.length >= 3) {
+                System.out.println("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+                System.exit(0);
+            } else {
+                System.out.println(result);
+            }
+        } else {
             try {
                 String result_roman = convertNumToRoman(result);
                 System.out.println(result_roman);
