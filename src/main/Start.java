@@ -9,14 +9,14 @@ public class Start {
    static int num2;
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
-        System.out.println("Введите выражение с двумя членами не более 10:");
+        System.out.println("Введите выражение с двумя членами не более 10 каждое:");
         String Input_string = in.nextLine();
         char[] Input_string_massive = Input_string.toCharArray();
         String[] Input_string_splitted = Input_string.split("[-+*/]");
         String Roman_first = Input_string_splitted[0];
         String Roman_second = Input_string_splitted[1].trim();
-        int rome_one = romanToNumber(Roman_first);
-        int rome_two = romanToNumber(Roman_second);
+        num1 = romanToNumber(Roman_first);
+        num2 = romanToNumber(Roman_second);
         String numberOnly = Input_string.replaceAll("[^0-9]", "");
         char[] number_massive = numberOnly.toCharArray();
         int numArr[] = new int[number_massive.length];
@@ -26,23 +26,22 @@ public class Start {
         if (numArr.length != 0) {
             num1 = Integer.parseInt(Roman_first);
             num2 = Integer.parseInt(Roman_second);
+            if ((num1 > 10) || (num2 > 10)) {
+                System.out.println("Число должно быть меньше 10");
+                System.exit(0);
+            }
         }
         int result = 0;
-        int rome_calc = 0;
         for (int i = 0; i < Input_string_massive.length; i++) {
             if ("+".equals(String.valueOf(Input_string_massive[i]))) {
                 result = num1 + num2;
-                rome_calc = rome_one + rome_two;
             } else if ("-".equals(String.valueOf(Input_string_massive[i]))) {
                 result = num1 - num2;
-                rome_calc = rome_one - rome_two;
             } else if ("*".equals(String.valueOf(Input_string_massive[i]))) {
                 result = num1 * num2;
-                rome_calc = rome_one * rome_two;
             } else if ("/".equals(String.valueOf(Input_string_massive[i]))) {
                 try {
                 result = num1 / num2;
-                rome_calc = rome_one / rome_two;
                 } catch (ArithmeticException | InputMismatchException e) {
                     System.out.println("Ошибка: " + e);
                     System.out.println("Введено нецелое или нулевое значение!");
@@ -55,7 +54,7 @@ public class Start {
             System.out.println(result);
         }
         else {
-            String result_roman = convertNumToRoman(rome_calc);
+            String result_roman = convertNumToRoman(result);
             System.out.println(result_roman);
         }
     }
@@ -88,7 +87,17 @@ public class Start {
         return -1;
     }
     private static String convertNumToRoman (int numArabian) {
-        String[] roman = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
+        String[] roman = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
+                "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
+                "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
+                "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
+                "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
+                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
+                "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"};
+        /*if (numArabian > 10) {
+            System.out.println("Число должно быть меньше 10");
+            System.exit(0);
+        }*/
         String Roman_result = roman[numArabian];
         return Roman_result;
     }
